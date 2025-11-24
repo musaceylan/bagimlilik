@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2563eb;
+  --color-secondary: #475569;
+  --color-accent: #0ea5e9;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+}
+
+/* Custom utilities using standard CSS */
+.btn-primary {
+  @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm hover:shadow-md;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-white text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors duration-200 font-medium;
+}
+
+.input-field {
+  @apply w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all duration-200;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-slate-100 p-6;
+}
