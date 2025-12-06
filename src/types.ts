@@ -2,9 +2,11 @@ export type UserRole = 'self' | 'relative' | 'health_professional';
 
 export type QuestionType = 'yes_no' | 'scale';
 
+export type Language = 'tr' | 'en' | 'ar' | 'es';
+
 export interface Question {
     id: number;
-    text: string;
+    text: Record<Language, string>;
     type: QuestionType;
 }
 

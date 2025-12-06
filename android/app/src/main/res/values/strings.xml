@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bağımlılık Anketi</string>
+    <string name="title_activity_main">Bağımlılık Anketi</string>
+    <string name="package_name">com.musaceylan.bagimlilik</string>
+    <string name="custom_url_scheme">com.musaceylan.bagimlilik</string>
+</resources>

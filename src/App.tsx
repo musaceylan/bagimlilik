@@ -1,16 +1,20 @@
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './components/Login';
 import { Survey } from './components/Survey';
+import { LanguageProvider } from './context/LanguageContext';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/survey" element={<Survey />} />
-      </Routes>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <LanguageSwitcher />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/survey" element={<Survey />} />
+        </Routes>
+      </Router>
+    </LanguageProvider>
   );
 }
 
