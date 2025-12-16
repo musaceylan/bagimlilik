@@ -3,6 +3,12 @@ import type { Language } from '../types';
 export const translations: Record<Language, {
     welcome: string;
     start: string;
+    landing: {
+        title: string;
+        description: string;
+        button: string;
+        privacy: string;
+    };
     role_selection: string;
     roles: {
         self: string;
@@ -43,6 +49,12 @@ export const translations: Record<Language, {
     tr: {
         welcome: "Bağımlılık Anketi",
         start: "Başla",
+        landing: {
+            title: "Hoş Geldiniz",
+            description: "Bağımlılık Risk Anketi'ne başlamak için lütfen aşağıdaki butona tıklayın.",
+            button: "Ankete Başla",
+            privacy: "Bu anket tamamen anonimdir. Kişisel verileriniz kaydedilmez."
+        },
         role_selection: "Anketi kimin adına dolduruyorsunuz?",
         roles: {
             self: "Kendim",
@@ -83,6 +95,12 @@ export const translations: Record<Language, {
     en: {
         welcome: "Addiction Survey",
         start: "Start",
+        landing: {
+            title: "Welcome",
+            description: "Please click the button below to start the Addiction Risk Survey.",
+            button: "Start Survey",
+            privacy: "This survey is completely anonymous. Your personal data is not recorded."
+        },
         role_selection: "Who are you filling this survey for?",
         roles: {
             self: "Myself",
@@ -123,6 +141,12 @@ export const translations: Record<Language, {
     ar: {
         welcome: "استبيان الإدمان",
         start: "يبدأ",
+        landing: {
+            title: "أهلاً بك",
+            description: "يرجى النقر على الزر أدناه لبدء استبيان مخاطر الإدمان.",
+            button: "ابدأ الاستبيان",
+            privacy: "هذا الاستبيان مجهول الهوية تماماً. لا يتم تسجيل بياناتك الشخصية."
+        },
         role_selection: "لمن تملأ هذا الاستبيان؟",
         roles: {
             self: "نفسي",
@@ -163,6 +187,12 @@ export const translations: Record<Language, {
     es: {
         welcome: "Encuesta de Adicción",
         start: "Comenzar",
+        landing: {
+            title: "Bienvenido",
+            description: "Por favor, haz clic en el botón de abajo para comenzar la Encuesta de Riesgo de Adicción.",
+            button: "Iniciar Encuesta",
+            privacy: "Esta encuesta es completamente anónima. Tus datos personales no se registran."
+        },
         role_selection: "¿Para quién estás llenando esta encuesta?",
         roles: {
             self: "Yo mismo",
