@@ -45,6 +45,13 @@ export const translations: Record<Language, {
             severe_risk: string;
         };
     };
+    disclaimer: {
+        title: string;
+        text: string;
+        sources_title: string;
+        sources: string[];
+        note: string;
+    };
 }> = {
     tr: {
         welcome: "Bağımlılık Anketi",
@@ -90,6 +97,18 @@ export const translations: Record<Language, {
                 high_risk: "Yüksek risk grubundasınız. Lütfen profesyonel destek alınız.",
                 severe_risk: "Acil durum! Lütfen en kısa sürede bir sağlık kuruluşuna veya Yeşilay Danışmanlık Merkezi'ne başvurunuz."
             }
+        },
+        disclaimer: {
+            title: "Uyarı",
+            text: "Bu anket yalnızca bilgilendirme amaçlıdır ve tıbbi teşhis yerine geçmez. Kesin değerlendirme için lütfen bir sağlık profesyoneline danışın.",
+            sources_title: "Kaynaklar",
+            sources: [
+                "Dünya Sağlık Örgütü (WHO) - Madde Bağımlılığı Değerlendirme Kılavuzu",
+                "DSM-5 - Ruhsal Bozuklukların Tanısal ve Sayımsal El Kitabı",
+                "Yeşilay Türkiye - Bağımlılık Danışmanlık Merkezi",
+                "T.C. Sağlık Bakanlığı - ALO 182 Bağımlılık Danışma Hattı"
+            ],
+            note: "Risk değerlendirmesi WHO ASSIST tarama aracı ve DSM-5 kriterleri referans alınarak hazırlanmıştır."
         }
     },
     en: {
@@ -136,6 +155,18 @@ export const translations: Record<Language, {
                 high_risk: "You are in the high risk group. Please get professional support.",
                 severe_risk: "Emergency! Please apply to a health institution or Green Crescent Counseling Center as soon as possible."
             }
+        },
+        disclaimer: {
+            title: "Disclaimer",
+            text: "This survey is for informational purposes only and does not replace medical diagnosis. Please consult a healthcare professional for a definitive assessment.",
+            sources_title: "Sources",
+            sources: [
+                "World Health Organization (WHO) - Substance Abuse Assessment Guidelines",
+                "DSM-5 - Diagnostic and Statistical Manual of Mental Disorders",
+                "Green Crescent Turkey - Addiction Counseling Center",
+                "Republic of Turkey Ministry of Health - ALO 182 Addiction Helpline"
+            ],
+            note: "Risk assessment is based on WHO ASSIST screening tool and DSM-5 criteria."
         }
     },
     ar: {
@@ -182,6 +213,18 @@ export const translations: Record<Language, {
                 high_risk: "أنت في مجموعة عالية المخاطر. يرجى الحصول على دعم احترافي.",
                 severe_risk: "طوارئ! يرجى التقدم بطلب إلى مؤسسة صحية أو مركز استشارات الهلال الأخضر في أقرب وقت ممكن."
             }
+        },
+        disclaimer: {
+            title: "تنويه",
+            text: "هذا الاستبيان للأغراض المعلوماتية فقط ولا يحل محل التشخيص الطبي. يرجى استشارة أخصائي رعاية صحية للحصول على تقييم نهائي.",
+            sources_title: "المصادر",
+            sources: [
+                "منظمة الصحة العالمية (WHO) - إرشادات تقييم تعاطي المخدرات",
+                "DSM-5 - الدليل التشخيصي والإحصائي للاضطرابات النفسية",
+                "الهلال الأخضر تركيا - مركز استشارات الإدمان",
+                "وزارة الصحة التركية - خط مساعدة الإدمان ALO 182"
+            ],
+            note: "يستند تقييم المخاطر إلى أداة فحص ASSIST التابعة لمنظمة الصحة العالمية ومعايير DSM-5."
         }
     },
     es: {
@@ -228,6 +271,18 @@ export const translations: Record<Language, {
                 high_risk: "Estás en el grupo de alto riesgo. Por favor, obtén apoyo profesional.",
                 severe_risk: "¡Emergencia! Por favor, acude a una institución de salud o al Centro de Consejería de la Media Luna Verde lo antes posible."
             }
+        },
+        disclaimer: {
+            title: "Aviso",
+            text: "Esta encuesta es solo para fines informativos y no reemplaza el diagnóstico médico. Consulte a un profesional de la salud para una evaluación definitiva.",
+            sources_title: "Fuentes",
+            sources: [
+                "Organización Mundial de la Salud (OMS) - Guías de Evaluación de Abuso de Sustancias",
+                "DSM-5 - Manual Diagnóstico y Estadístico de los Trastornos Mentales",
+                "Media Luna Verde Turquía - Centro de Consejería de Adicciones",
+                "Ministerio de Salud de Turquía - Línea de Ayuda de Adicciones ALO 182"
+            ],
+            note: "La evaluación de riesgos se basa en la herramienta de detección ASSIST de la OMS y los criterios del DSM-5."
         }
     }
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -10,6 +10,7 @@ interface ResultsProps {
 
 export const Results: React.FC<ResultsProps> = ({ score, totalQuestions, onRestart }) => {
     const { t } = useLanguage();
+    const [showSources, setShowSources] = useState(false);
 
     // Maximum possible score is 5 per question
     const maxScore = totalQuestions * 5;
@@ -62,9 +63,49 @@ export const Results: React.FC<ResultsProps> = ({ score, totalQuestions, onResta
                     {riskLevel}
                 </div>
 
-                <p className="text-slate-600 mb-8 leading-relaxed">
+                <p className="text-slate-600 mb-6 leading-relaxed">
                     {advice}
                 </p>
+
+                {/* Disclaimer Banner */}
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 text-left">
+                    <div className="flex items-start gap-2">
+                        <span className="text-amber-600 text-lg">⚠️</span>
+                        <div className="text-sm text-amber-800">
+                            <p className="font-semibold">{t.disclaimer.title}</p>
+                            <p className="mt-1">{t.disclaimer.text}</p>
+                            <p className="mt-2 text-xs text-amber-700 italic">{t.disclaimer.note}</p>
+
+                            <button
+                                onClick={() => setShowSources(!showSources)}
+                                className="mt-3 text-amber-600 hover:text-amber-800 underline text-xs font-medium flex items-center gap-1"
+                            >
+                                {t.disclaimer.sources_title}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={2}
+                                    stroke="currentColor"
+                                    className={`w-3 h-3 transition-transform ${showSources ? 'rotate-180' : ''}`}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+
+                            {showSources && (
+                                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                                    {t.disclaimer.sources.map((source, index) => (
+                                        <li key={index} className="flex items-start gap-1">
+                                            <span>•</span>
+                                            <span>{source}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    </div>
+                </div>
 
                 <div className="space-y-3">
                     {showLink && (
