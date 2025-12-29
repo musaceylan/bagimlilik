@@ -6,10 +6,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('../bagimlilik-release.keystore')
-            storePassword 'Bagimlilik2024Secure'
+            storeFile file('bagimlilik-release.keystore')
+            storePassword 'Shinkai.2025'
             keyAlias 'bagimlilik'
-            keyPassword 'Bagimlilik2024Secure'
+            keyPassword 'Shinkai.2025'
         }
     }
 
@@ -17,8 +17,8 @@ android {
         applicationId "com.musaceylan.bagimlilik"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
