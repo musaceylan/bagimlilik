@@ -49,7 +49,7 @@ export const translations: Record<Language, {
         title: string;
         text: string;
         sources_title: string;
-        sources: string[];
+        sources: { title: string; url: string }[];
         note: string;
     };
 }> = {
@@ -103,10 +103,11 @@ export const translations: Record<Language, {
             text: "Bu anket yalnızca bilgilendirme amaçlıdır ve tıbbi teşhis yerine geçmez. Kesin değerlendirme için lütfen bir sağlık profesyoneline danışın.",
             sources_title: "Kaynaklar",
             sources: [
-                "Dünya Sağlık Örgütü (WHO) - Madde Bağımlılığı Değerlendirme Kılavuzu",
-                "DSM-5 - Ruhsal Bozuklukların Tanısal ve Sayımsal El Kitabı",
-                "Yeşilay Türkiye - Bağımlılık Danışmanlık Merkezi",
-                "T.C. Sağlık Bakanlığı - ALO 182 Bağımlılık Danışma Hattı"
+                { title: "WHO ASSIST - Madde Kullanımı Tarama Aracı", url: "https://www.who.int/publications/i/item/978924159938-2" },
+                { title: "DSM-5 - Ruhsal Bozuklukların Tanısal El Kitabı", url: "https://www.psychiatry.org/psychiatrists/practice/dsm" },
+                { title: "Yeşilay Türkiye - Bağımlılık Danışmanlık Merkezi", url: "https://www.yesilay.org.tr/" },
+                { title: "T.C. Sağlık Bakanlığı - Bağımlılık Hizmetleri", url: "https://hsgm.saglik.gov.tr/tr/bagimliliklamucadele.html" },
+                { title: "WHO - Substance Abuse Guidelines", url: "https://www.who.int/health-topics/substance-abuse" }
             ],
             note: "Risk değerlendirmesi WHO ASSIST tarama aracı ve DSM-5 kriterleri referans alınarak hazırlanmıştır."
         }
@@ -161,10 +162,11 @@ export const translations: Record<Language, {
             text: "This survey is for informational purposes only and does not replace medical diagnosis. Please consult a healthcare professional for a definitive assessment.",
             sources_title: "Sources",
             sources: [
-                "World Health Organization (WHO) - Substance Abuse Assessment Guidelines",
-                "DSM-5 - Diagnostic and Statistical Manual of Mental Disorders",
-                "Green Crescent Turkey - Addiction Counseling Center",
-                "Republic of Turkey Ministry of Health - ALO 182 Addiction Helpline"
+                { title: "WHO ASSIST - Substance Use Screening Tool", url: "https://www.who.int/publications/i/item/978924159938-2" },
+                { title: "DSM-5 - Diagnostic and Statistical Manual", url: "https://www.psychiatry.org/psychiatrists/practice/dsm" },
+                { title: "Green Crescent Turkey - Addiction Counseling", url: "https://www.yesilay.org.tr/" },
+                { title: "WHO - Substance Abuse Guidelines", url: "https://www.who.int/health-topics/substance-abuse" },
+                { title: "NIDA - National Institute on Drug Abuse", url: "https://nida.nih.gov/publications/principles-drug-addiction-treatment" }
             ],
             note: "Risk assessment is based on WHO ASSIST screening tool and DSM-5 criteria."
         }
@@ -219,10 +221,11 @@ export const translations: Record<Language, {
             text: "هذا الاستبيان للأغراض المعلوماتية فقط ولا يحل محل التشخيص الطبي. يرجى استشارة أخصائي رعاية صحية للحصول على تقييم نهائي.",
             sources_title: "المصادر",
             sources: [
-                "منظمة الصحة العالمية (WHO) - إرشادات تقييم تعاطي المخدرات",
-                "DSM-5 - الدليل التشخيصي والإحصائي للاضطرابات النفسية",
-                "الهلال الأخضر تركيا - مركز استشارات الإدمان",
-                "وزارة الصحة التركية - خط مساعدة الإدمان ALO 182"
+                { title: "أداة فحص ASSIST - منظمة الصحة العالمية", url: "https://www.who.int/publications/i/item/978924159938-2" },
+                { title: "DSM-5 - الدليل التشخيصي والإحصائي", url: "https://www.psychiatry.org/psychiatrists/practice/dsm" },
+                { title: "الهلال الأخضر تركيا - استشارات الإدمان", url: "https://www.yesilay.org.tr/" },
+                { title: "إرشادات تعاطي المخدرات - WHO", url: "https://www.who.int/health-topics/substance-abuse" },
+                { title: "NIDA - المعهد الوطني لتعاطي المخدرات", url: "https://nida.nih.gov/publications/principles-drug-addiction-treatment" }
             ],
             note: "يستند تقييم المخاطر إلى أداة فحص ASSIST التابعة لمنظمة الصحة العالمية ومعايير DSM-5."
         }
@@ -277,10 +280,11 @@ export const translations: Record<Language, {
             text: "Esta encuesta es solo para fines informativos y no reemplaza el diagnóstico médico. Consulte a un profesional de la salud para una evaluación definitiva.",
             sources_title: "Fuentes",
             sources: [
-                "Organización Mundial de la Salud (OMS) - Guías de Evaluación de Abuso de Sustancias",
-                "DSM-5 - Manual Diagnóstico y Estadístico de los Trastornos Mentales",
-                "Media Luna Verde Turquía - Centro de Consejería de Adicciones",
-                "Ministerio de Salud de Turquía - Línea de Ayuda de Adicciones ALO 182"
+                { title: "WHO ASSIST - Herramienta de Detección", url: "https://www.who.int/publications/i/item/978924159938-2" },
+                { title: "DSM-5 - Manual Diagnóstico y Estadístico", url: "https://www.psychiatry.org/psychiatrists/practice/dsm" },
+                { title: "Media Luna Verde Turquía - Consejería", url: "https://www.yesilay.org.tr/" },
+                { title: "OMS - Guías de Abuso de Sustancias", url: "https://www.who.int/health-topics/substance-abuse" },
+                { title: "NIDA - Instituto Nacional sobre el Abuso de Drogas", url: "https://nida.nih.gov/publications/principles-drug-addiction-treatment" }
             ],
             note: "La evaluación de riesgos se basa en la herramienta de detección ASSIST de la OMS y los criterios del DSM-5."
         }

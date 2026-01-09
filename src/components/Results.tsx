@@ -94,11 +94,18 @@ export const Results: React.FC<ResultsProps> = ({ score, totalQuestions, onResta
                             </button>
 
                             {showSources && (
-                                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                                <ul className="mt-2 space-y-2 text-xs text-amber-700">
                                     {t.disclaimer.sources.map((source, index) => (
                                         <li key={index} className="flex items-start gap-1">
                                             <span>•</span>
-                                            <span>{source}</span>
+                                            <a
+                                                href={source.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-amber-700 hover:text-amber-900 underline"
+                                            >
+                                                {source.title}
+                                            </a>
                                         </li>
                                     ))}
                                 </ul>
