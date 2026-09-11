@@ -11,6 +11,7 @@ workflows:
         - bagimlilik_android_signing
       vars:
         PUPPETEER_SKIP_DOWNLOAD: "true"
+        ANDROID_HOME: /usr/local/share/android-sdk
 
     scripts:
       - name: Install dependencies and lint
@@ -22,7 +23,7 @@ workflows:
       - name: Install Android SDK 36
         script: |
           set -eu
-          sdkmanager "platforms;android-36" "build-tools;35.0.0"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;35.0.0"
 
       - name: Check Android and build signed APK and bundle
         script: |
