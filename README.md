@@ -15,7 +15,7 @@ Android application ID: `com.musaceylan.bagimlilik`.
 | System bars and cutouts | Capacitor's `adjustMarginsForEdgeToEdge: 'auto'` keeps the WebView inside the safe area on Android 15+ |
 | Window resizing | Activity handles density changes in addition to orientation and screen size, avoiding WebView recreation for those changes |
 | Predictive back | No custom legacy back interception or opt-out found; verify back-to-home/resume on Android 16 |
-| Native libraries | No `.so` libraries in the checked-in historical APK; no native plugins declared. Inspect the newly built release artifact as well |
+| Native libraries | The signed APK and AAB from the successful Codemagic build contain no `.so` libraries; the workflow checks every build |
 
 Google Play requires **API 36 for new phone/tablet apps and updates from
 31 August 2026**. Existing API 35 releases meet the current availability threshold,
@@ -114,6 +114,19 @@ The existing Bağımlılık Codemagic app uses the application-scoped secret gro
 existing upload keystore to a temporary file and removes it when the build step
 ends. The iOS workflow is unchanged.
 
+### Successful cloud verification
+
+[Codemagic build 3](https://codemagic.io/app/69444ac5d64f1d8a4028522c/build/6aa48872f0624dac92df782e)
+built commit `de641e4a756b094288f537a20c6c76183e35eb86` on branch
+`codex/android-api36-codemagic` successfully. Web lint/build, Android lint,
+unit tests, debug and instrumentation-test APK compilation, and signed release
+APK/AAB assembly passed. APK and bundle signature verification passed; neither
+artifact contains native shared libraries. Download `app-release.apk` for
+installation or `app-release.aab` for a later Play submission from the build page.
+
+Device/emulator tests were not executed. Complete the device checks above before
+release. This build did not publish to a store or run the iOS workflow.
+
 ## Verification on this workstation
 
 - Before and after the update: TypeScript/Vite production build and ESLint passed.
@@ -124,7 +137,6 @@ ends. The iOS workflow is unchanged.
   screen also had no horizontal overflow at 1024 × 768.
 - Manifest XML, package/lockfile consistency, and `git diff --check` passed.
 - `npm run android:check` stopped at Gradle startup because Java is unavailable.
-  This Linux ARM64 workstation has no JDK or Android SDK. Native compilation,
-  Android lint/unit/instrumentation tests, signing, and device behavior remain
-  unverified; no new APK/AAB was produced. Browser checks do not verify native
-  insets or predictive-back behavior.
+  This Linux ARM64 workstation has no JDK or Android SDK; native compilation,
+  lint, unit tests, and signing were subsequently verified by the cloud build
+  above. Browser checks do not verify native insets or predictive-back behavior.
