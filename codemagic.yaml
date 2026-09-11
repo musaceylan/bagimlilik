@@ -1,4 +1,84 @@
 workflows:
+  android-build:
+    name: Android API 36 build
+    max_build_duration: 45
+    instance_type: mac_mini_m2
+
+    environment:
+      node: 24
+      java: 21
+      groups:
+        - bagimlilik_android_signing
+      vars:
+        PUPPETEER_SKIP_DOWNLOAD: "true"
+
+    scripts:
+      - name: Install dependencies and lint
+        script: |
+          set -eu
+          npm ci --no-audit --no-fund
+          npm run lint
+
+      - name: Install Android SDK 36
+        script: |
+          set -eu
+          sdkmanager "platforms;android-36" "build-tools;35.0.0"
+
+      - name: Check Android and build signed APK and bundle
+        script: |
+          set -eu
+          set +x
+          export BAGIMLILIK_KEYSTORE_PATH="$CM_BUILD_DIR/../bagimlilik-upload.keystore"
+          trap 'rm -f "$BAGIMLILIK_KEYSTORE_PATH"' EXIT
+          python3 - <<'PY'
+          import base64
+          import os
+          from pathlib import Path
+
+          for name in ["BAGIMLILIK_KEYSTORE_BASE64", "BAGIMLILIK_KEYSTORE_PASSWORD",
+                       "BAGIMLILIK_KEY_ALIAS", "BAGIMLILIK_KEY_PASSWORD"]:
+              if not os.environ.get(name):
+                  raise SystemExit(f"Missing signing secret: {name}")
+          path = Path(os.environ["BAGIMLILIK_KEYSTORE_PATH"])
+          with open(path, "xb") as output:
+              os.chmod(path, 0o600)
+              output.write(base64.b64decode(os.environ["BAGIMLILIK_KEYSTORE_BASE64"], validate=True))
+          PY
+          npm run android:check
+          cd android
+          ./gradlew --no-daemon assembleRelease bundleRelease
+
+      - name: Verify release artifacts
+        script: |
+          set -eu
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
+          jarsigner -verify android/app/build/outputs/bundle/release/app-release.aab
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+
+          paths = [Path("android/app/build/outputs/apk/release/app-release.apk"),
+                   Path("android/app/build/outputs/bundle/release/app-release.aab")]
+          for path in paths:
+              with ZipFile(path) as archive:
+                  names = archive.namelist()
+                  native = [name for name in names if name.endswith(".so")]
+                  if native:
+                      raise SystemExit(f"Native libraries require a 16 KB alignment review: {native}")
+                  if path.suffix == ".aab" and not any(
+                      name.startswith("META-INF/") and name.endswith((".RSA", ".DSA", ".EC"))
+                      for name in names
+                  ):
+                      raise SystemExit("Release bundle is unsigned")
+              print(f"Verified {path.name}: no native shared libraries")
+          PY
+
+    artifacts:
+      - android/app/build/outputs/apk/release/*.apk
+      - android/app/build/outputs/bundle/release/*.aab
+      - android/app/build/reports/**
+      - android/app/build/test-results/**/*.xml
+
   ios-workflow:
     name: iOS Build
     max_build_duration: 60

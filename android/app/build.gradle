@@ -1,15 +1,30 @@
 apply plugin: 'com.android.application'
 
+// Supply signing credentials through the environment, never in source control.
+// Without all four values, release builds remain unsigned for local validation.
+def releaseSigning = [
+    storeFile: System.getenv('BAGIMLILIK_KEYSTORE_PATH'),
+    storePassword: System.getenv('BAGIMLILIK_KEYSTORE_PASSWORD'),
+    keyAlias: System.getenv('BAGIMLILIK_KEY_ALIAS'),
+    keyPassword: System.getenv('BAGIMLILIK_KEY_PASSWORD')
+]
+def hasReleaseSigning = releaseSigning.values().every { it != null && !it.isEmpty() }
+if (!hasReleaseSigning && releaseSigning.values().any { it != null }) {
+    throw new GradleException('Incomplete release signing configuration. Set all four BAGIMLILIK signing environment variables or leave all unset for an unsigned build.')
+}
+
 android {
     namespace "com.musaceylan.bagimlilik"
     compileSdk rootProject.ext.compileSdkVersion
 
     signingConfigs {
-        release {
-            storeFile file('bagimlilik-release.keystore')
-            storePassword 'Shinkai.2025'
-            keyAlias 'bagimlilik'
-            keyPassword 'Shinkai.2025'
+        if (hasReleaseSigning) {
+            release {
+                storeFile file(releaseSigning.storeFile)
+                storePassword releaseSigning.storePassword
+                keyAlias releaseSigning.keyAlias
+                keyPassword releaseSigning.keyPassword
+            }
         }
     }
 
@@ -17,8 +32,8 @@ android {
         applicationId "com.musaceylan.bagimlilik"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -30,7 +45,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            if (hasReleaseSigning) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }
